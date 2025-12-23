@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NeuroSAGE - Sistema de Metas com Neuropsicanalítica</title>
+    <meta name="description" content="Descubra por que você se sabota antes de desistir. Sistema baseado em neuropsicanalítica para quem tem 15 metas e 0 resultados.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #667eea;
+            --primary-hover: #5568d3;
+            --secondary: #11998e;
+            --gradient-start: #667eea;
+            --gradient-end: #764ba2;
+            --bg-hero: #0a0a0a;
+            --bg-section: #1a1a1a;
+            --bg-dark: #0f0f0f;
+            --bg-card: #252525;
+            --text-primary: #FFFFFF;
+            --text-secondary: #E0E0E0;
+            --text-muted: #CCCCCC;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--text-primary);
+            background: var(--bg-hero);
+            line-height: 1.6;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* HEADER */
+        header {
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 20px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .header-content {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo-img {
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+        }
+
+        .logo h1 {
+            font-size: 28px;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* HERO SECTION */
+        .hero {
+            background: var(--bg-hero);
+            padding: 100px 0 80px;
+            text-align: center;
+        }
+
+        .hero h2 {
+            font-size: 48px;
+            font-weight: 800;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .hero .subtitle {
+            font-size: 24px;
+            color: var(--text-secondary);
+            margin-bottom: 40px;
+            line-height: 1.4;
+        }
+
+        .hero-text {
+            max-width: 700px;
+            margin: 0 auto 50px;
+            font-size: 18px;
+            color: var(--text-muted);
+            line-height: 1.8;
+        }
+
+        .hero-text p {
+            margin-bottom: 20px;
+        }
+
+        .hero-text strong {
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        .cta-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--primary);
+            color: white;
+            padding: 18px 40px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .cta-primary:hover {
+            background: var(--primary-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+        }
+
+        /* O QUE É SECTION */
+        .what-is {
+            background: var(--bg-section);
+            padding: 80px 0;
+        }
+
+        .section-title {
+            font-size: 36px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .section-subtitle {
+            font-size: 20px;
+            text-align: center;
+            color: var(--text-secondary);
+            max-width: 800px;
+            margin: 0 auto 60px;
+            line-height: 1.6;
+        }
+
+        .steps-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .step-card {
+            background: var(--bg-card);
+            padding: 35px;
+            border-radius: 12px;
+            transition: transform 0.3s ease;
+        }
+
+        .step-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .step-icon {
+            font-size: 40px;
+            margin-bottom: 15px;
+        }
+
+        .step-card h3 {
+            font-size: 20px;
+            margin-bottom: 15px;
+            color: var(--primary);
+        }
+
+        .step-card p {
+            font-size: 16px;
+            color: var(--text-muted);
+            line-height: 1.7;
+        }
+
+        /* PARA QUEM É SECTION */
+        .for-who {
+            background: var(--bg-dark);
+            padding: 80px 0;
+        }
+
+        .columns-wrapper {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin-top: 40px;
+        }
+
+        .column {
+            background: var(--bg-card);
+            padding: 40px;
+            border-radius: 12px;
+        }
+
+        .column h3 {
+            font-size: 24px;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .column ul {
+            list-style: none;
+        }
+
+        .column ul li {
+            padding: 12px 0;
+            padding-left: 30px;
+            position: relative;
+            font-size: 16px;
+            color: var(--text-muted);
+            line-height: 1.8;
+        }
+
+        .column ul li:before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 18px;
+            width: 6px;
+            height: 6px;
+            background: var(--primary);
+            border-radius: 50%;
+        }
+
+        .column.not-for ul li:before {
+            background: #e74c3c;
+        }
+
+        /* CTA DUPLO SECTION */
+        .cta-section {
+            background: linear-gradient(135deg, var(--gradient-start) 0%, var(--gradient-end) 100%);
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        .cta-section h2 {
+            font-size: 40px;
+            margin-bottom: 30px;
+        }
+
+        .benefits-list {
+            max-width: 700px;
+            margin: 0 auto 40px;
+            text-align: left;
+        }
+
+        .benefits-list h3 {
+            font-size: 22px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .benefits-columns {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-top: 20px;
+        }
+
+        .benefits-columns ul {
+            list-style: none;
+        }
+
+        .benefits-columns li {
+            padding: 10px 0;
+            font-size: 16px;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 40px;
+        }
+
+        .cta-beta {
+            background: var(--secondary);
+            color: white;
+            padding: 18px 40px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .cta-beta:hover {
+            background: #0d7a6f;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(17, 153, 142, 0.3);
+        }
+
+        .cta-mvp {
+            background: transparent;
+            color: white;
+            padding: 18px 40px;
+            border: 2px solid white;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .cta-mvp:hover {
+            background: white;
+            color: var(--gradient-end);
+        }
+
+        .disclaimer {
+            margin-top: 30px;
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        /* FOOTER */
+        footer {
+            background: #000000;
+            padding: 40px 0;
+            text-align: center;
+            color: #666666;
+        }
+
+        footer p {
+            margin-bottom: 10px;
+            font-size: 14px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            color: #666666;
+            font-size: 24px;
+            transition: color 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: var(--primary);
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .hero h2 {
+                font-size: 32px;
+            }
+
+            .hero .subtitle {
+                font-size: 18px;
+            }
+
+            .hero-text {
+                font-size: 16px;
+            }
+
+            .section-title {
+                font-size: 28px;
+            }
+
+            .section-subtitle {
+                font-size: 18px;
+            }
+
+            .steps-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .benefits-columns {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .cta-section h2 {
+                font-size: 28px;
+            }
+
+            .logo h1 {
+                font-size: 24px;
+            }
+        }
+
+        /* ANIMAÇÕES */
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-up {
+            animation: fadeUp 0.6s ease-out forwards;
+        }
+    </style>
+</head>
+<body>
+    <!-- HEADER -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <img src="assets/sage.png" alt="NeuroSAGE Logo" class="logo-img">
+                    <h1>NeuroSAGE</h1>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section class="hero">
+        <div class="container">
+            <h2 class="fade-up">Convertendo Suas 15 Metas em 1 Resultado Real</h2>
+            <p class="subtitle fade-up">Sistema de Metas com Neuropsicanalítica</p>
+            
+            <div class="hero-text fade-up">
+                <p>Você começou o ano com <strong>15 metas ambiciosas</strong>, mas em junho, apenas cinco projetos foram iniciados e, ao chegar em dezembro, nenhum foi finalizado?</p>
+                
+                <p>Calma, isso não significa que você está quebrado.<br>
+                <strong>Seu cérebro, talvez, funcione de maneira diferente.</strong></p>
+                
+                <p>É exatamente por isso que o <strong>NeuroSAGE</strong> foi criado.</p>
+            </div>
+
+            <a href="https://forms.gle/fCAZ29xBiHeV6vs17" target="_blank" class="cta-primary">
+                🧠 QUERO TESTAR (50 VAGAS BETA)
+            </a>
+        </div>
+    </section>
+
+    <!-- O QUE É SECTION -->
+    <section class="what-is">
+        <div class="container">
+            <h2 class="section-title">O Que é o NeuroSAGE?</h2>
+            <p class="section-subtitle">
+                NeuroSAGE não é mais um app de hábitos.<br>
+                É um sistema que identifica por que você se sabota — e intervém no momento certo.
+            </p>
+
+            <div class="steps-grid">
+                <div class="step-card">
+                    <div class="step-icon">🎯</div>
+                    <h3>1. Você escolhe SUA META PRINCIPAL</h3>
+                    <p>Das 8 áreas da vida (Saúde, Finanças, Relacionamentos...).<br><br>
+                    Exemplo: "Correr 3x/semana"<br><br>
+                    (Você pode monitorar outras áreas de forma leve)</p>
+                </div>
+
+                <div class="step-card">
+                    <div class="step-icon">🧠</div>
+                    <h3>2. Sistema mapeia seu padrão</h3>
+                    <p>→ Tudo ou Nada?<br>
+                    → Procrastinação Crônica?<br>
+                    → Perfeccionismo Paralisante?</p>
+                </div>
+
+                <div class="step-card">
+                    <div class="step-icon">📝</div>
+                    <h3>3. Você registra tentativas</h3>
+                    <p>Check-in COMAR:<br>
+                    Contexto, Obstáculo, Meta, Ação, Resultado<br><br>
+                    (Não só sucessos — também "falhas")</p>
+                </div>
+
+                <div class="step-card">
+                    <div class="step-icon">⚡</div>
+                    <h3>4. Modo Entre-Lugar intervém</h3>
+                    <p>Sistema detecta 3 falhas consecutivas<br>
+                    → Sugere: "Reduza em 50%"<br>
+                    → Você mantém consistência sem culpa</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PARA QUEM É SECTION -->
+    <section class="for-who">
+        <div class="container">
+            <h2 class="section-title">Para Quem é o NeuroSAGE?</h2>
+
+            <div class="columns-wrapper">
+                <div class="column">
+                    <h3>✅ Você se identifica se:</h3>
+                    <ul>
+                        <li>Já tentou Habitica/Streaks mas gamificação não te motiva</li>
+                        <li>Você tem TDAH ou cérebro não-linear</li>
+                        <li>Você quer entender o PORQUÊ da autossabotagem</li>
+                        <li>Você prefere reflexão profunda a notificações irritantes</li>
+                        <li>Você quer 1 meta bem-feita, não 15 metas medianas</li>
+                    </ul>
+                </div>
+
+                <div class="column not-for">
+                    <h3>❌ Não é para você se:</h3>
+                    <ul>
+                        <li>Você quer um app "automático"</li>
+                        <li>Você precisa de XP, níveis, avatares</li>
+                        <li>Você não tem 5 min/dia para registrar</li>
+                        <li>Você quer resultados em 7 dias</li>
+                        <li>Você só quer "mais um app de hábitos"</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA DUPLO SECTION -->
+    <section class="cta-section">
+        <div class="container">
+            <h2>Teste o NeuroSAGE (50 Vagas Beta Gratuitas)</h2>
+            
+            <div class="benefits-list">
+                <div class="benefits-columns">
+                    <div>
+                        <h3>O que você recebe:</h3>
+                        <ul>
+                            <li>✓ Acesso completo por 90 dias (gratuito)</li>
+                            <li>✓ Onboarding guiado (mapeamento do seu padrão)</li>
+                            <li>✓ Check-ins COMAR ilimitados</li>
+                            <li>✓ Modo Entre-Lugar (intervenção adaptativa)</li>
+                            <li>✓ Suporte direto com o criador</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3>O que eu peço:</h3>
+                        <ul>
+                            <li>→ Uso mínimo de 3x/semana</li>
+                            <li>→ Feedback honesto mensal</li>
+                            <li>→ Disposição para testar novas features</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="cta-buttons">
+                <a href="https://forms.gle/fCAZ29xBiHeV6vs17" target="_blank" class="cta-beta">
+                    🧠 QUERO TESTAR GRÁTIS (BETA)
+                </a>
+                <a href="#" class="cta-mvp">
+                    💎 ACESSO GARANTIDO (R$ 47)
+                </a>
+            </div>
+
+            <p class="disclaimer">
+                Não foi selecionado para o beta?<br>
+                Você receberá oferta exclusiva para comprar o MVP com 40% de desconto.
+            </p>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="container">
+            <p>© 2024 NeuroSAGE</p>
+            <p>Desenvolvido por Petruchio Barros</p>
+            <p>Método baseado em Neuropsicanalítica Aplicada</p>
+            
+            <div class="social-links">
+                <a href="#" aria-label="Instagram">📷</a>
+                <a href="#" aria-label="Email">📧</a>
+                <a href="#" aria-label="WhatsApp">💬</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Animação ao scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.step-card, .column').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'all 0.6s ease-out';
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
